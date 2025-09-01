@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandify • Portfolio</title>
+  <meta name="description" content="Brandify — Digital marketing, design, editing, and social media services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --bg-soft: #0f1524;
+      --card: #0f162a;
+      --text: #e6ecff;
+      --muted: #a9b3c9;
+      --brand: #7c5cff;
+      --brand-2: #00e5ff;
+      --accent: #ff7ac8;
+      --success: #38ef7d;
+      --warning: #ffd166;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.02);
+      --glass: rgba(255,255,255,0.06);
+    }
+    /* Light theme */
+    html.light {
+      --bg: #f7f8fd;
+      --bg-soft: #ffffff;
+      --card: #ffffff;
+      --text: #0c1222;
+      --muted: #5c6882;
+      --brand: #5b3df6;
+      --brand-2: #0bbbd9;
+      --accent: #d8338c;
+      --shadow: 0 10px 30px rgba(7, 9, 25, 0.08), inset 0 1px 0 rgba(0,0,0,0.02);
+      --glass: rgba(7,9,25,0.04);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; color: var(--text); background: radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,0.12), transparent),
+        radial-gradient(900px 500px at 90% 10%, rgba(0,229,255,0.10), transparent),
+        linear-gradient(180deg, var(--bg), var(--bg));
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.6; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1200px, 92vw); margin: 0 auto; }
+    .pill { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .85rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: var(--glass); backdrop-filter: blur(6px); box-shadow: var(--shadow); font-weight: 600; color: var(--muted); }
+    .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; border-radius: 12px; font-weight:700; border: 1px solid rgba(255,255,255,.12); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(0,0,0,.3); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: white; border: 0; }
+    .btn.ghost { background: transparent; }
+    .tag { display:inline-block; padding:.35rem .7rem; border-radius:999px; font-size:.8rem; background: rgba(124,92,255,.15); border:1px solid rgba(124,92,255,.3); color:#e7deff; }
+
+    /* Navbar */
+    nav { position: sticky; top: 0; z-index: 50; background: rgba(11,15,26,.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; padding: .9rem 0; }
+    .brand { display:flex; align-items:center; gap:.8rem; font-weight:900; letter-spacing:.4px; }
+    .brand .logo { width: 38px; height: 38px; border-radius: 10px; background: conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--accent), var(--brand)); box-shadow: 0 6px 18px rgba(124,92,255,.35); position:relative; }
+    .brand .logo::after { content:""; position:absolute; inset:3px; border-radius:8px; background: radial-gradient(120px 40px at 40% 30%, rgba(255,255,255,.7), transparent 60%), rgba(0,0,0,.25); mix-blend: overlay; }
+    .nav-links { display:flex; gap:1.2rem; align-items:center; }
+    .nav-links a { color: var(--muted); font-weight:600; padding:.5rem .7rem; border-radius:8px; }
+    .nav-links a:hover { color: var(--text); background: var(--glass); }
+    .mobile-toggle { display:none; }
+
+    /* Hero */
+    header.hero { padding: 90px 0 40px; position: relative; }
+    .hero-grid { display:grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+    .hero h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 4vw, 3.6rem); line-height: 1.1; margin: 14px 0 12px; letter-spacing: .2px; }
+    .hero p.sub { color: var(--muted); font-size: 1.05rem; }
+    .hero-cta { display:flex; gap:.8rem; flex-wrap: wrap; margin-top: 18px; }
+    .stats { display:flex; gap:18px; margin-top:22px; }
+    .stat { background: var(--glass); border:1px solid rgba(255,255,255,.1); padding:14px 16px; border-radius: 14px; text-align:center; min-width: 120px; box-shadow: var(--shadow); }
+    .stat h3 { margin:0; font-size:1.4rem; }
+    .stat span { color: var(--muted); font-size:.85rem; }
+    .hero-visual { position:relative; height: 460px; border-radius: var(--radius); background: linear-gradient(135deg, rgba(124,92,255,.22), rgba(0,229,255,.18)); box-shadow: var(--shadow); overflow: hidden; }
+    .floating { position:absolute; border-radius: 14px; background: var(--card); border:1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); padding: 12px 14px; display:flex; align-items:center; gap:10px; }
+    .floating svg { width: 20px; height:20px; }
+    .f1 { top: 26px; left: 26px; }
+    .f2 { top: 120px; right: 24px; }
+    .f3 { bottom: 24px; left: 24px; }
+
+    /* Section */
+    section { padding: 70px 0; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap: 16px; margin-bottom: 28px; }
+    .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin:0; }
+    .section-head p { color: var(--muted); max-width: 680px; margin: 6px 0 0; }
+
+    /* Services */
+    .grid { display:grid; gap: 18px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .card:hover { transform: translateY(-4px); transition: .25s ease; }
+    .card .icon { width: 42px; height: 42px; display:grid; place-items:center; border-radius: 12px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 10px 20px rgba(0,0,0,.3); margin-bottom: 10px; }
+    .card h3 { margin: 8px 0; font-size: 1.1rem; }
+    .card p { color: var(--muted); font-size: .95rem; margin:0; }
+    .card .badge { position:absolute; top: 16px; right: 16px; }
+
+    /* Showcase */
+    .showcase { display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; }
+    .shot { height: 240px; border-radius: 16px; background: linear-gradient(135deg, rgba(124,92,255,.2), rgba(0,229,255,.18)); border:1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); position:relative; overflow:hidden; }
+    .shot.small { height: 180px; }
+    .shot::after { content:"Mockup"; position:absolute; bottom:10px; right:12px; color: rgba(255,255,255,.35); font-weight:700; font-size:.8rem; letter-spacing:.08em; }
+
+    /* Pricing */
+    .pricing { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
+    .price-card { padding: 22px; border-radius: 18px; border:1px solid rgba(255,255,255,.1); background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow: var(--shadow); position:relative; }
+    .price-card .tier { font-weight: 800; font-size: 1.1rem; }
+    .price { font-size: 2rem; font-weight: 900; margin: 6px 0; }
+    .features { list-style: none; padding:0; margin: 12px 0 0; color: var(--muted); }
+    .features li { margin: 8px 0; display:flex; gap:10px; align-items:flex-start; }
+
+    /* Testimonials */
+    .testimonials { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
+    .quote { padding:18px; border-radius:16px; border:1px solid rgba(255,255,255,.1); background: var(--glass); box-shadow: var(--shadow); }
+    .quote p { margin:0; }
+    .quote .who { margin-top:12px; color: var(--muted); font-size:.9rem; }
+
+    /* Tools */
+    .tools { display:flex; flex-wrap:wrap; gap:10px; }
+    .tool { padding:.45rem .75rem; border-radius:999px; background: var(--glass); border:1px solid rgba(255,255,255,.08); color: var(--muted); font-weight:600; }
+
+    /* Contact */
+    form { display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+    form .full { grid-column: 1 / -1; }
+    input, textarea { width:100%; padding: .9rem 1rem; border-radius: 12px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: var(--text); font: inherit; }
+    textarea { min-height: 140px; resize: vertical; }
+
+    /* Footer */
+    footer { padding: 28px 0 50px; color: var(--muted); border-top: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, rgba(255,255,255,.02), transparent); }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid, .showcase { grid-template-columns: 1fr; }
+      .grid.cols-3, .grid.cols-4, .pricing, .testimonials { grid-template-columns: 1fr 1fr; }
+      nav .nav-links { display:none; }
+      .mobile-toggle { display:inline-flex; }
+    }
+    @media (max-width: 640px){
+      .grid.cols-3, .grid.cols-4, .pricing, .testimonials { grid-template-columns: 1fr; }
+      .stats { flex-direction: column; }
+      form { grid-template-columns: 1fr; }
+    }
+    .whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 28px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+.whatsapp-float img {
+  width: 32px;
+  height: 32px;
+}
+
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <a href="#top" aria-label="Brandify Home">Brandify</a>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <button class="btn ghost" id="themeBtn" aria-label="Toggle theme">🌓 Theme</button>
+      </div>
+      <button class="btn ghost mobile-toggle" id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="pill">✨ Elevate your brand with design, content, and growth</span>
+        <h1>Strategy-first creative studio for <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent;">digital marketing</span> and standout visuals.</h1>
+        <p class="sub">From logos and visiting cards to wedding invitations, videos, and social media growth—Brandify delivers pixel-perfect design and measurable results.
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#contact">Get a free quote</a>
+          <a class="btn" href="#work">See recent work</a>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <h3>150+</h3>
+            <span>Successful projects</span>
+          </div>
+          <div class="stat">
+            <h3>4.9★</h3>
+            <span>Average client rating</span>
+          </div>
+          <div class="stat">
+            <h3>7+</h3>
+            <span>Years of experience</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating f1"><svg viewBox="0 0 24 24" fill="none"><path d="M4 17V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Z" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.5"/></svg> Social posts calendar</div>
+        <div class="floating f2"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H4z" stroke="currentColor" stroke-width="1.5"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M12 10h6" stroke="currentColor" stroke-width="1.5"/></svg> Video edit timeline</div>
+        <div class="floating f3"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.9L18.18 22 12 18.56 5.82 22 7 14.17l-5-4.9 6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5"/></svg> Logo concepts</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Services built for speed, quality, and growth</h2>
+          <p>Pick a service or mix-and-match. Everything you need to launch, grow, and polish your brand—delivered with a strategic mindset.</p>
+        </div>
+        <a class="btn" href="#contact">Start a project →</a>
+      </div>
+      <div class="grid cols-4">
+        <div class="card"><span class="badge tag">Most Popular</span><div class="icon">📈</div><h3>Digital Marketing</h3><p>Campaign strategy, funnels, email + CRM, analytics, and growth playbooks.</p></div>
+        <div class="card"><div class="icon">🎨</div><h3>Logo Design</h3><p>Memorable marks with brand guidelines, color palettes, and usage rules.</p></div>
+        <div class="card"><div class="icon">💼</div><h3>Visiting Cards</h3><p>Premium print-ready cards with QR and NFC options for seamless sharing.</p></div>
+        <div class="card"><div class="icon">💍</div><h3>Wedding Invitations</h3><p>Elegant invites—digital or print—with envelopes and RSVP microsites.</p></div>
+        <div class="card"><div class="icon">🎧</div><h3>Audio Editing</h3><p>Podcast cleanup, mastering, ads, and background score polishing.</p></div>
+        <div class="card"><div class="icon">✂️</div><h3>Video Editing</h3><p>Reels, shorts, ads, and long-form edits with motion graphics and captions.</p></div>
+        <div class="card"><div class="icon">🖼️</div><h3>Photo Editing</h3><p>Retouching, color grading, product polish, and composite artistry.</p></div>
+        <div class="card"><div class="icon">🧠</div><h3>Image Creation</h3><p>From concept to final artwork—ads, thumbnails, banners, and posters.</p></div>
+        <div class="card"><div class="icon">📹</div><h3>Video Creation</h3><p>Script → shoot plan → edit. End-to-end content designed to convert.</p></div>
+        <div class="card"><div class="icon">📱</div><h3>Social Media & Pages</h3><p>Setup, branding, content calendars, and daily page handling.</p></div>
+        <div class="card"><div class="icon">🎯</div><h3>Ads & Sales</h3><p>Meta, Google, TikTok—creative + targeting that turns clicks into clients.</p></div>
+        <div class="card"><div class="icon">🛠️</div><h3>Custom Requests</h3><p>Have something unique in mind? Let’s build it together.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Selected work & concept shots</h2>
+          <p>Showcasing brand identities, social campaigns, edits, and print. Replace mockups with your real projects.</p>
+        </div>
+        <div class="tools">
+          <span class="tool">Photoshop</span>
+          <span class="tool">Illustrator</span>
+          <span class="tool">Premiere</span>
+          <span class="tool">After Effects</span>
+          <span class="tool">CapCut</span>
+          <span class="tool">Canva</span>
+          <span class="tool">Meta Ads</span>
+          <span class="tool">Google Ads</span>
+        </div>
+      </div>
+      <div class="showcase">
+        <div class="shot" aria-label="Large mockup"></div>
+        <div class="grid">
+          <div class="shot small"></div>
+          <div class="shot small"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Simple pricing that scales with you</h2>
+          <p>Transparent, flexible, and value-packed. Custom retainers available for ongoing growth.</p>
+        </div>
+      </div>
+      <div class="pricing">
+        <div class="price-card">
+          <span class="tag">Starter</span>
+          <div class="tier">Best for one-off tasks</div>
+          <div class="price">$99+</div>
+          <ul class="features">
+            <li>✔ Logo refresh or card design</li>
+            <li>✔ 5 social posts or 1 short video</li>
+            <li>✔ 2 revisions</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn" href="#contact">Choose Starter</a></div>
+        </div>
+        <div class="price-card" style="border-color:rgba(124,92,255,.6); background:linear-gradient(180deg, rgba(124,92,255,.18), rgba(255,255,255,.02));">
+          <span class="tag">Growth</span>
+          <div class="tier">For active creators & SMEs</div>
+          <div class="price">$299+</div>
+          <ul class="features">
+            <li>✔ 12 social posts + 4 reels</li>
+            <li>✔ Ad creatives & basic setup</li>
+            <li>✔ Priority turnaround</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn primary" href="#contact">Choose Growth</a></div>
+        </div>
+        <div class="price-card">
+          <span class="tag">Pro</span>
+          <div class="tier">Full-service retainer</div>
+          <div class="price">$799+</div>
+          <ul class="features">
+            <li>✔ Strategy + content calendar</li>
+            <li>✔ Cross-platform ads & reports</li>
+            <li>✔ Dedicated support</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn" href="#contact">Choose Pro</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>About Brandify</h2>
+          <p>A creative partner focused on outcomes—not just outputs. I combine design craft with data-driven marketing to turn attention into action.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <div class="card"><div class="icon">🧭</div><h3>Strategy first</h3><p>Clear goals, defined audience, measurable KPIs. Every pixel serves a purpose.</p></div>
+        <div class="card"><div class="icon">⚡</div><h3>Fast & reliable</h3><p>On-time delivery with agile feedback loops and proactive communication.</p></div>
+        <div class="card"><div class="icon">💎</div><h3>Premium quality</h3><p>Polished visuals, sharp copy, and brand consistency across every touchpoint.</p></div>
+      </div>
+      <div style="margin-top:18px" class="tools">
+        <span class="tool">Brand Identity</span>
+        <span class="tool">Print Design</span>
+        <span class="tool">Motion Graphics</span>
+        <span class="tool">Content Strategy</span>
+        <span class="tool">Analytics</span>
+        <span class="tool">A/B Testing</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>What clients say</h2>
+          <p>Real words from people who trusted Brandify with their brand.</p>
+        </div>
+      </div>
+      <div class="testimonials">
+        <div class="quote"><p>“Outstanding creativity and speed. Our engagement doubled in 30 days.”</p><div class="who">— Sana, Café Owner</div></div>
+        <div class="quote"><p>“From logo to launch—everything felt premium and effortless.”</p><div class="who">— Adeel, Startup Founder</div></div>
+        <div class="quote"><p>“Videos and ads that actually convert. Worth every rupee.”</p><div class="who">— Hira, E‑commerce Manager</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Let’s build something remarkable</h2>
+          <p>Tell me about your goals. I’ll reply with timeline and a clear quote within 24 hours.</p>
+        </div>
+      </div>
+     <form action="https://formspree.io/f/xyzabcd" method="POST">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" name="name" placeholder="Your full name" required>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" placeholder="you@example.com" required>
+  </div>
+  <div class="full">
+    <label for="service">What do you need?</label>
+    <input id="service" name="service" placeholder="e.g., Logo + social kit + ad creatives">
+  </div>
+  <div class="full">
+    <label for="message">Project details</label>
+    <textarea id="message" name="message" placeholder="Tell me about your brand, audience, deadline, and budget."></textarea>
+  </div>
+  <div>
+    <button class="btn primary" type="submit">Send inquiry</button>
+  </div>
+          <a href="https://wa.me/923302591796" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+</a>
+
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+      <div>© <span id="year"></span> Brandify. All rights reserved.</div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <a class="pill" href="#top">Back to top ↑</a>
+        <a class="pill" href="https://github.com/yourusername/brandify-portfolio" target="_blank" rel="noopener">GitHub</a>
+        <a class="pill" href="#">LinkedIn</a>
+        <a class="pill" href="#">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const links = document.getElementById('nav-links');
+    menuBtn?.addEventListener('click', () => {
+      const open = links.style.display === 'flex';
+      links.style.display = open ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '60px';
+      links.style.right = '16px';
+      links.style.background = 'var(--bg-soft)';
+      links.style.padding = '12px';
+      links.style.borderRadius = '12px';
+      links.style.border = '1px solid rgba(255,255,255,.08)';
+    });
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeBtn');
+    const setTheme = (t) => { document.documentElement.classList.toggle('light', t === 'light'); localStorage.setItem('theme', t); }
+    themeBtn?.addEventListener('click', () => { const isLight = document.documentElement.classList.contains('light'); setTheme(isLight ? 'dark' : 'light'); });
+    setTheme(localStorage.getItem('theme') || 'dark');
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{ const id=a.getAttribute('href'); if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'}); }});
+    });
+  </script>
+</body>
+</html>
