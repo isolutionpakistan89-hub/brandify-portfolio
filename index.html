@@ -24,7 +24,6 @@
       --shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.02);
       --glass: rgba(255,255,255,0.06);
     }
-    /* Light theme */
     html.light {
       --bg: #f7f8fd;
       --bg-soft: #ffffff;
@@ -40,7 +39,9 @@
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
-      margin: 0; color: var(--text); background: radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,0.12), transparent),
+      margin: 0; color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,0.12), transparent),
         radial-gradient(900px 500px at 90% 10%, rgba(0,229,255,0.10), transparent),
         linear-gradient(180deg, var(--bg), var(--bg));
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -93,7 +94,7 @@
     .grid { display:grid; gap: 18px; }
     .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
     .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
-    .card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); position: relative; overflow: hidden; cursor:pointer; }
     .card:hover { transform: translateY(-4px); transition: .25s ease; }
     .card .icon { width: 42px; height: 42px; display:grid; place-items:center; border-radius: 12px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 10px 20px rgba(0,0,0,.3); margin-bottom: 10px; }
     .card h3 { margin: 8px 0; font-size: 1.1rem; }
@@ -145,35 +146,15 @@
       .stats { flex-direction: column; }
       form { grid-template-columns: 1fr; }
     }
+
+    /* Floating WhatsApp */
     .whatsapp-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: #fff;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 28px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 1000;
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
-
-.whatsapp-float img {
-  width: 32px;
-  height: 32px;
-}
-
+      position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px;
+      background: #25D366; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25); z-index: 1000; transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+    .whatsapp-float img { width: 32px; height: 32px; }
   </style>
 </head>
 <body>
@@ -200,31 +181,21 @@
       <div class="hero-copy">
         <span class="pill">✨ Elevate your brand with design, content, and growth</span>
         <h1>Strategy-first creative studio for <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent;">digital marketing</span> and standout visuals.</h1>
-        <p class="sub">From logos and visiting cards to wedding invitations, videos, and social media growth—Brandify delivers pixel-perfect design and measurable results.
-        </p>
+        <p class="sub">From logos and visiting cards to wedding invitations, videos, and social media growth—Brandify delivers pixel-perfect design and measurable results.</p>
         <div class="hero-cta">
           <a class="btn primary" href="#contact">Get a free quote</a>
           <a class="btn" href="#work">See recent work</a>
         </div>
         <div class="stats">
-          <div class="stat">
-            <h3>150+</h3>
-            <span>Successful projects</span>
-          </div>
-          <div class="stat">
-            <h3>4.9★</h3>
-            <span>Average client rating</span>
-          </div>
-          <div class="stat">
-            <h3>7+</h3>
-            <span>Years of experience</span>
-          </div>
+          <div class="stat"><h3>150+</h3><span>Successful projects</span></div>
+          <div class="stat"><h3>4.9★</h3><span>Average client rating</span></div>
+          <div class="stat"><h3>7+</h3><span>Years of experience</span></div>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="floating f1"><svg viewBox="0 0 24 24" fill="none"><path d="M4 17V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Z" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.5"/></svg> Social posts calendar</div>
-        <div class="floating f2"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H4z" stroke="currentColor" stroke-width="1.5"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M12 10h6" stroke="currentColor" stroke-width="1.5"/></svg> Video edit timeline</div>
-        <div class="floating f3"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.9L18.18 22 12 18.56 5.82 22 7 14.17l-5-4.9 6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5"/></svg> Logo concepts</div>
+        <div class="floating f1">📆 Social posts calendar</div>
+        <div class="floating f2">🎞️ Video edit timeline</div>
+        <div class="floating f3">⭐ Logo concepts</div>
       </div>
     </div>
   </header>
@@ -377,7 +348,7 @@
           <p>Tell me about your goals. I’ll reply with timeline and a clear quote within 24 hours.</p>
         </div>
       </div>
-     <form action="https://formspree.io/f/xyzabcd" method="POST">
+      <form action="https://formspree.io/f/xdkldbbb" method="POST">
   <div>
     <label for="name">Name</label>
     <input id="name" name="name" placeholder="Your full name" required>
@@ -397,10 +368,7 @@
   <div>
     <button class="btn primary" type="submit">Send inquiry</button>
   </div>
-          <a href="https://wa.me/923302591796" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
-</a>
-
+          <a class="btn" id="waCTA" href="https://wa.me/923302591796" target="_blank" rel="noopener">Chat on WhatsApp</a>
         </div>
       </form>
     </div>
@@ -411,12 +379,17 @@
       <div>© <span id="year"></span> Brandify. All rights reserved.</div>
       <div style="display:flex; gap:12px; align-items:center;">
         <a class="pill" href="#top">Back to top ↑</a>
-        <a class="pill" href="https://github.com/yourusername/brandify-portfolio" target="_blank" rel="noopener">GitHub</a>
+        <a class="pill" href="https://github.com/isolutionpakistan89-hub/brandify-portfolio" target="_blank" rel="noopener">GitHub</a>
         <a class="pill" href="#">LinkedIn</a>
         <a class="pill" href="#">Instagram</a>
       </div>
     </div>
   </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/923001234567" class="whatsapp-float" id="waFloat" target="_blank" aria-label="Chat on WhatsApp">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+  </a>
 
   <script>
     // Mobile menu
@@ -444,10 +417,45 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Smooth scroll
+    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', e=>{ const id=a.getAttribute('href'); if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'}); }});
     });
+
+    // Service → Contact autofill & scroll + WhatsApp deep link update
+    (function(){
+      const serviceInput = document.getElementById('service');
+      const contactSection = document.querySelector('#contact');
+      const waCTA = document.getElementById('waCTA');
+      const waFloat = document.getElementById('waFloat');
+      const WA_NUMBER = '923001234567'; // TODO: replace with your full WhatsApp number (no +)
+
+      function setWhatsAppText(title){
+        const base = `https://wa.me/${WA_NUMBER}`;
+        const text = `Hi! I'm interested in ${title} service. Can you help me with pricing and timeline?`;
+        const url = base + '?text=' + encodeURIComponent(text);
+        if (waCTA) waCTA.href = url;
+        if (waFloat) waFloat.href = url;
+      }
+
+      document.querySelectorAll('#services .card').forEach(card => {
+        const title = card.querySelector('h3')?.innerText?.trim();
+        // a11y
+        card.setAttribute('role','button');
+        card.setAttribute('tabindex','0');
+        const go = () => {
+          if (serviceInput && title) serviceInput.value = title;
+          setWhatsAppText(title || 'your service');
+          contactSection?.scrollIntoView({behavior: 'smooth'});
+          document.getElementById('name')?.focus();
+        };
+        card.addEventListener('click', go);
+        card.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+      });
+
+      // Initialize WhatsApp links without a selected service
+      setWhatsAppText('a service');
+    })();
   </script>
 </body>
 </html>
